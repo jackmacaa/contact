@@ -1,9 +1,4 @@
-<?php
-    if(filter_has_var(INPUT_POST, 'submit'))
-    {
-        echo 'submittedd';
-    }
-?>
+<?php require_once "validate.php" ?>
 
 <!doctype html>
 <html lang="en">
@@ -24,20 +19,23 @@
         </div>
     </nav>
     <div class="container">
+        <?php if($msg != "") : ?>
+            <div class="alert <?= $msgClass; ?>"><?= $msg; ?></div>
+        <?php endif; ?>
         <form action="<?= $_SERVER['PHP_SELF']; ?>" method="post">
             <div class="form-group">
                 <label for="name">Name
-                    <input type="text" name="name" value="" class="form-control">
+                    <input type="text" name="name" value="<?= isset($_POST['name']) ? $name : ''; ?>" class="form-control">
                 </label>
             </div>
             <div class="form-group">
                 <label for="email">Email
-                    <input type="text" name="email" value="" class="form-control">
+                    <input type="text" name="email" value="<?= isset($_POST['email']) ? $email : ''; ?>" class="form-control">
                 </label>
             </div>
             <div class="form-group">
                 <label for="message">Message
-                    <input type="text" name="message" value="" class="form-control">
+                    <textarea name="message" class="form-control"><?= isset($_POST['message']) ? $message : ''; ?></textarea>
                 </label>
             </div>
             <br>
